@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 import "../../typography.scss";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 import classes from "./Banner.module.scss";
 
@@ -9,7 +11,16 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Banner() {
   const [movie, setMovie] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
+  const opts = {
+    height: "500px",
+    width: "100%",
+    // playerVars: {
+    //   // https://developers.google.com/youtube/player_parameters
+    //   autoplay: 1,
+    // },
+  };
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(requests.fetchNetflixOriginals);
@@ -18,10 +29,32 @@ function Banner() {
           Math.floor(Math.random() * request.data.results.length - 1)
         ]
       );
+
       return request;
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchVideoId() {
+      if (trailerUrl) {
+        setTrailerUrl("");
+      }
+      try {
+        const req = await movieTrailer(
+          movie?.name || movie?.original_name || "" || movie?.title
+        );
+        const urlParams = await new URLSearchParams(new URL(req).search);
+        // console.log(urlParams.get("v"));
+        setTrailerUrl(urlParams.get("v"));
+        return req;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchVideoId();
+    return () => {};
+  }, [movie]);
 
   const truncate = (str, n) =>
     str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -37,6 +70,11 @@ function Banner() {
         backgroundPosition: "top center",
       }}
     >
+      {trailerUrl && (
+        <div className={classes.Banner__Bgvideo}>
+          <YouTube videoId={trailerUrl} opts={opts} />
+        </div>
+      )}
       <div className={classes.Banner__contents}>
         <h1 className={`heading-primary`}>
           {movie?.name || movie?.title || movie?.original_name}

@@ -1,9 +1,11 @@
 .Row {
-  margin-left: 1rem;
+  padding-left: 1rem;
+  width: 100%;
+  background-color: var(--bg-dark-primary);
   color: var(--color-white);
   position: relative;
   transition: all 0.3s;
-
+  z-index: 200;
   &__title {
     &:link,
     &:visited {

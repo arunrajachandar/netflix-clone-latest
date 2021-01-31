@@ -24,12 +24,12 @@ export const fetchTrendingsReducer = (state = initialState, action) => {
       const findInx = state.data?.findIndex(
         (movie) => movie?.id === action.movieId
       );
-      console.log(findInx);
+      // console.log(findInx);
       const copyObject = state.data;
       copyObject[findInx].isAdded = copyObject[findInx].isAdded
         ? !copyObject[findInx].isAdded
         : true;
-      console.log(copyObject);
+      // console.log(copyObject);
       return {
         ...state,
         data: [...copyObject],

@@ -9,12 +9,26 @@
     margin-right: 0.5rem;
   }
 
+  &__Bgvideo {
+    position: absolute;
+    top: 0;
+    // left: 1px;
+    z-index: 1;
+  }
+
   &__posterTitle {
     line-height: 1;
     margin-bottom: 0.5rem;
   }
 
+  &__posterDesc {
+    &Hidden {
+      display: none;
+    }
+  }
+
   &__posterImg {
+    // z-index: 10;
     object-fit: contain;
     max-height: 10rem;
     display: block;
@@ -26,6 +40,8 @@
   }
 
   &__posterHoveredImgGrow {
+    // z-index: 10;
+
     object-fit: cover;
     object-position: top;
     width: 100%;
@@ -34,11 +50,13 @@
 
   &:hover {
     backface-visibility: hidden;
-    transform: scale(1.08);
+    transform: scale(1.09);
     z-index: 100;
   }
 
   &__posterInfo {
+    // z-index: 10;
+
     padding: 0 1rem;
     position: absolute;
     top: 0;
@@ -47,12 +65,17 @@
   }
 
   &__posterInfoWidth {
+    // z-index: 10;
     width: fit-content;
   }
 
   &__posterInfoHovered {
+    // z-index: 10;
     top: 60%;
-    transform: translateY(-50%);
+    // transform: translateY(-50%);
+    &IsTrailerUrl {
+      top: 70%;
+    }
     overflow: hidden;
   }
 
@@ -65,13 +88,23 @@
     transition: all 1s ease;
   }
 
+  &__posterHoveredImgTrailer {
+    -webkit-filter: brightness(100%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+  }
+
   &__buttons {
+    z-index: 200;
     border-radius: 0 0 5px 5px;
     padding: 0.5rem;
     width: 100%;
     position: absolute;
     top: 100%;
-    background-color: rgba(34, 32, 32, 0.6);
+    background-color: rgba(34, 32, 32, 0.8);
     display: flex;
     justify-content: space-evenly;
   }

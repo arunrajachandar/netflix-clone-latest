@@ -1,21 +1,50 @@
 import React, { useState } from "react";
 import classes from "./Card.module.scss";
 import "../../typography.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { isAddedTrendings } from "../../store/Trendings/fetchTrendingsActionCreators";
 import {
   pushMovies,
   removeMovies,
 } from "../../store/Wishlist/WishListActionCreator";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Card({ movie, isLargeRow, isGrid }) {
   const [hovered, setHovered] = useState(false);
-  const dispatch = useDispatch();
+  const [trailerUrl, setTrailerUrl] = useState("");
 
+  const dispatch = useDispatch();
+  const fetchVideoId = async () => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    }
+    try {
+      const req = await movieTrailer(
+        movie?.name || movie?.original_name || "" || movie?.title
+      );
+      const urlParams = await new URLSearchParams(new URL(req).search);
+      // console.log(urlParams.get("v"));
+      setTrailerUrl(urlParams.get("v"));
+      return req;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const opts = {
+    height: "200px",
+    width: "100%",
+    // playerVars: {
+    //   // https://developers.google.com/youtube/player_parameters
+    autoplay: 1,
+    // },
+  };
   const onMouseEnter = (event) => {
     setHovered(true);
+    fetchVideoId();
   };
 
   const onMouseLeave = (event) => {
@@ -40,29 +69,50 @@ function Card({ movie, isLargeRow, isGrid }) {
         onMouseEnter={() => onMouseEnter()}
         onMouseLeave={() => onMouseLeave()}
       >
+        {hovered && trailerUrl && (
+          <div className={classes.Card__Bgvideo}>
+            <YouTube videoId={trailerUrl} opts={opts} />
+          </div>
+        )}
         <img
           src={`${base_url}${
             isLargeRow ? movie?.poster_path : movie?.backdrop_path
           }`}
           alt={movie?.name || movie?.title}
-          className={`${classes.Card__posterImg} ${
-            isLargeRow && classes.Card__posterImgLarge
-          } ${isGrid && classes.Card__posterHoveredImgGrow} 
-          ${hovered && classes.Card__posterHoveredImg}
-          `}
+          className={`${classes.Card__posterImg} 
+          ${isLargeRow && classes.Card__posterImgLarge}
+           ${isGrid && classes.Card__posterHoveredImgGrow} 
+     ${
+       hovered &&
+       (classes.Card__posterHoveredImg ||
+         (trailerUrl && classes.Card__posterHoveredImgTrailer))
+     }              
+    
+     `}
         />
+
         {hovered && (
           <>
             <div
-              className={`${classes.Card__posterInfo} ${
-                hovered && classes.Card__posterInfoHovered
-              } ${isGrid && classes.Card__posterInfoWidth} `}
+              className={`${classes.Card__posterInfo}
+               ${hovered && classes.Card__posterInfoHovered} 
+               ${
+                 hovered &&
+                 trailerUrl &&
+                 classes.Card__posterInfoHoveredIsTrailerUrl
+               } 
+
+               ${isGrid && classes.Card__posterInfoWidth} `}
             >
               <h1 className={`${classes.Card__posterTitle}`}>
                 {movie?.title || movie?.name}
               </h1>
-              <div className={classes.Card__posterDesc}>
-                {truncate(movie?.overview, 100)}
+              <div
+                className={`${classes.Card__posterDesc} ${
+                  trailerUrl && classes.Card__posterDescHidden
+                }`}
+              >
+                {truncate(movie?.overview, 80)}
               </div>
             </div>
             <div className={classes.Card__buttons}>

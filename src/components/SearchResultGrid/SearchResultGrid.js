@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./SearchResultGrid.module.scss";
-import { Redirect, withRouter } from "react-router-dom";
-import { useSelector, connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Grid from "../Grid/Grid";
 
 function SearchResultGrid() {
