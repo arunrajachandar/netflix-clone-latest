@@ -1,0 +1,102 @@
+.Nav {
+  height: 15vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  color: var(--color-white);
+  left: 0;
+  padding: 1rem;
+  z-index: 700;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 52.6em) {
+    flex-wrap: wrap;
+    height: 8rem;
+    align-content: space-between;
+  }
+  &__Black {
+    background-color: var(--bg-dark-primary);
+  }
+  &__logo {
+    height: 2rem;
+    margin-right: auto;
+    cursor: pointer;
+  }
+
+  &__link {
+    align-self: stretch;
+    margin-right: 1rem;
+    &:visited,
+    &:link {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: var(--color-white);
+    }
+  }
+
+  &__container {
+    @media screen and (max-width: 52.6em) {
+      order: 1;
+      flex: 0 0 100%;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: none;
+    border-radius: 5px;
+    &:hover,
+    &:active {
+      background-color: var(--bg-light);
+      box-shadow: 0 1rem 2rem var(--bg-light);
+    }
+  }
+
+  &__Input {
+    align-self: stretch;
+    align-items: center;
+  }
+  &__wishlist {
+    align-self: center;
+  }
+  &__input {
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    background-color: var(--bg-light);
+    transform: translateX(100%);
+    display: none;
+    @media screen and (max-width: 52.6em) {
+      transform: translateX(0);
+      width: 100%;
+      display: block;
+    }
+    font-size: 1rem;
+    max-width: 100%;
+    padding: 0 0.4rem;
+    border-radius: 5px 0 0 5px;
+    transition: all 0.6s;
+    backface-visibility: hidden;
+    &Expand {
+      display: block;
+      transform: translateX(0);
+    }
+  }
+
+  &__search {
+    z-index: 0;
+    align-self: center;
+    background: none;
+    color: var(--color-white);
+    cursor: pointer;
+    border: none;
+    padding: 1rem;
+    border-radius: 0 5px 5px 0;
+  }
+
+  &__profilePic {
+    height: 2rem;
+    cursor: pointer;
+    object-fit: cover;
+  }
+}

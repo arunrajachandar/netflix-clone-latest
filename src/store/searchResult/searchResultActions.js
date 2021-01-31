@@ -1,0 +1,1 @@
+export const CAPTURE_KEYWORD = "CAPTURE_KEYWORD";

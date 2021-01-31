@@ -1,0 +1,54 @@
+.Banner {
+  color: var(--color-white);
+  height: 70vh;
+
+  &__contents {
+    padding: 2rem;
+    padding-top: 30vh;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  &__button {
+    align-self: stretch;
+    justify-self: center;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 700;
+    max-width: 10rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2px;
+    color: var(--color-white);
+    background-color: rgba(187, 187, 187, 0.274);
+
+    cursor: pointer;
+    transition: all 0.2s;
+    & > span {
+      margin-right: 0.5rem;
+    }
+    backface-visibility: hidden;
+  }
+
+  &__button:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  &__button:hover {
+    transform: scale(1.02);
+    background-color: rgba(230, 230, 230, 0.5);
+  }
+  &__desc {
+    width: 50%;
+    max-height: 20vh;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-top: 1rem;
+    font-size: 1rem;
+  }
+}

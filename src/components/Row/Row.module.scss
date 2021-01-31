@@ -1,0 +1,97 @@
+.Row {
+  margin-left: 1rem;
+  color: var(--color-white);
+  position: relative;
+  transition: all 0.3s;
+
+  &__title {
+    &:link,
+    &:visited {
+      text-decoration: none;
+      color: var(--color-white);
+    }
+    // background-color: orangered;
+    // height: 2rem;
+    // margin-left: 4rem;
+    display: flex;
+    align-items: center;
+    // justify-content: space-around;
+    cursor: pointer;
+    &Symbol {
+      margin-left: 1rem;
+      padding: 0.3rem 1rem;
+      font-size: 1.5rem;
+      border: 2px solid var(--color-grey-dark);
+      border-radius: 50%;
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &::selection {
+    color: none;
+    background: none;
+  }
+
+  &__Scroller {
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    top: 60%;
+    transform: translateY(-60%);
+    height: 40%;
+    z-index: 500;
+    max-width: 10rem;
+    // font-size: 10rem;
+    opacity: 0.2;
+    text-align: center;
+    background-color: var(--bg-dark-primary);
+    color: var(--color-grey-dark-1);
+    transition: all 0.3s;
+    &:active,
+    &:hover {
+      opacity: 0.9;
+    }
+    &Text {
+      display: inline-block;
+      //   position: absolute;
+      //   //   top: -10rem;
+      //   background-color: orangered;
+      font-size: 3rem;
+      height: 100%;
+      padding: 1.2rem 1rem;
+      //   translate: transformY(-50%);
+      //   margin-top: 0;
+      &__largeRow {
+        font-size: 5rem;
+        padding: 2rem 1rem;
+      }
+    }
+  }
+
+  &__ScrollerLeft {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  &__ScrollerHidden {
+    display: None;
+  }
+  &__ScrollerRight {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  &__poster {
+    display: flex;
+    overflow-y: scroll;
+    // overflow-x: hidden;
+    padding: 2rem;
+    padding-bottom: 4rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

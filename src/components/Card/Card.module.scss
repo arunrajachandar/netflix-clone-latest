@@ -1,0 +1,97 @@
+.Card {
+  align-self: stretch;
+  transition: all 0.4s;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  &__posterTitle {
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  &__posterImg {
+    object-fit: contain;
+    max-height: 10rem;
+    display: block;
+    border-radius: 3px;
+  }
+
+  &__posterImgLarge {
+    max-height: 20rem;
+  }
+
+  &__posterHoveredImgGrow {
+    object-fit: cover;
+    object-position: top;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    backface-visibility: hidden;
+    transform: scale(1.08);
+    z-index: 100;
+  }
+
+  &__posterInfo {
+    padding: 0 1rem;
+    position: absolute;
+    top: 0;
+    z-index: 200;
+    transition: all 0.5s;
+  }
+
+  &__posterInfoWidth {
+    width: fit-content;
+  }
+
+  &__posterInfoHovered {
+    top: 60%;
+    transform: translateY(-50%);
+    overflow: hidden;
+  }
+
+  &__posterHoveredImg {
+    -webkit-filter: brightness(50%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+  }
+
+  &__buttons {
+    border-radius: 0 0 5px 5px;
+    padding: 0.5rem;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    background-color: rgba(34, 32, 32, 0.6);
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  &__button {
+    align-self: stretch;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--color-grey-dark);
+    border-radius: 50%;
+    background-color: rgba(34, 32, 32, 0.6);
+    color: var(--color-grey-dark);
+    &:hover {
+      background-color: var(--color-grey-dark);
+    }
+    &BgWhite {
+      background-color: var(--color-grey-dark);
+    }
+  }
+}
